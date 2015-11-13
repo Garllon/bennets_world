@@ -1,5 +1,7 @@
 module BennetsWorld
   class Ball
+    attr_reader :x, :y
+
     def initialize(game_window)
       @game_window = game_window
       @icon = Gosu::Image.new(@game_window, './images/asteroid.png', true)
@@ -9,24 +11,16 @@ module BennetsWorld
     end
 
     def update
-      if @y > @game_window.height
+      if y > @game_window.height
         @y = 0
         @x = rand(@game_window.width - @icon.width)
       else
-        @y = @y + 10
+        @y = y + 10
       end
     end
 
     def draw
-      @icon.draw(@x, @y, 1)
-    end
-
-    def x
-      @x
-    end
-
-    def y
-      @y
+      @icon.draw(x, y, 1)
     end
 
     def reset!
