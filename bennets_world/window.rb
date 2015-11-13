@@ -5,6 +5,7 @@ module BennetsWorld
       self.caption = 'Bennets Game'
 
       @player1 = Player.new(self) 
+      @ball = Ball.new(self)
     end
     
     def update
@@ -14,10 +15,13 @@ module BennetsWorld
       when 'up' then @player1.move_up
       when 'down' then @player1.move_down
       end
+
+      @ball.update
     end
 
     def draw
       @player1.draw
+      @ball.draw
     end
 
     private

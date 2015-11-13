@@ -3,6 +3,7 @@ module BennetsWorld
     def initialize(game_window)
       @game_window = game_window
       @icon = Gosu::Image.new(@game_window, './images/player1.png', true)
+
       @x = 50
       @y = 50
     end
@@ -20,8 +21,8 @@ module BennetsWorld
     end
 
     def move_right
-      if @x > 500
-        @x = 500
+      if @x > (@game_window.width - @icon.width)
+        @x = @game_window.width - @icon.width
       else
         @x = @x + 10
       end
@@ -36,8 +37,8 @@ module BennetsWorld
     end
 
     def move_down
-      if @y > 500
-        @y = 500
+      if @y > (@game_window.height - @icon.height)
+        @y = @game_window.height - @icon.height
       else
         @y = @y + 10
       end
