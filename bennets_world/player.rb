@@ -12,19 +12,35 @@ module BennetsWorld
     end
 
     def move_left
-      @x = @x - 10
+      if @x < 0
+        @x = 0
+      else
+        @x = @x - 10
+      end
     end
 
     def move_right
-      @x = @x + 10
+      if @x > 500
+        @x = 500
+      else
+        @x = @x + 10
+      end
     end
 
     def move_up
-      @y = @y - 10
+      if @y < 0
+        @y = 0
+      else
+        @y = @y - 10
+      end
     end
 
     def move_down
-      @y = @y + 10
+      if @y > 500
+        @y = 500
+      else
+        @y = @y + 10
+      end
     end
   end
 end
