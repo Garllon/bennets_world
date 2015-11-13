@@ -9,11 +9,29 @@ module BennetsWorld
     end
 
     def update
-      @y = @y + 10
+      if @y > @game_window.height
+        @y = 0
+        @x = rand(@game_window.width - @icon.width)
+      else
+        @y = @y + 10
+      end
     end
 
     def draw
       @icon.draw(@x, @y, 1)
+    end
+
+    def x
+      @x
+    end
+
+    def y
+      @y
+    end
+
+    def reset!
+      @y = 0
+      @x = rand(@game_window.width - @icon.width)
     end
   end
 end

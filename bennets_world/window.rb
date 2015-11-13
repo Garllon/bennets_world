@@ -5,26 +5,46 @@ module BennetsWorld
       self.caption = 'Bennets Game'
 
       @player1 = Player.new(self) 
-      @ball = Ball.new(self)
+      @balls = 3.times.map { Ball.new(self) }
+      @running = true
     end
     
     def update
-      case which_button
-      when 'left' then @player1.move_left
-      when 'right' then @player1.move_right
-      when 'up' then @player1.move_up
-      when 'down' then @player1.move_down
-      end
+      if @running
+        case which_button
+        when 'left' then @player1.move_left
+        when 'right' then @player1.move_right
+        when 'up' then @player1.move_up
+        when 'down' then @player1.move_down
+        end
 
-      @ball.update
+        @balls.each { |ball| ball.update }
+
+        if @player1.hit_by?(@balls)
+          stop_game!
+        end
+      else
+        if button_down? Gosu::Button::KbEscape
+          restart_game
+        end
+      end
     end
 
     def draw
       @player1.draw
-      @ball.draw
+      @balls.each { |ball| ball.draw }
     end
 
     private
+
+    def stop_game!
+      @running = false
+    end
+
+    def restart_game
+      @running = true
+      @balls.each { |ball| ball.reset! }
+    end
 
     def which_button
       return 'left' if button_down? Gosu::Button::KbLeft 

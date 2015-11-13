@@ -5,7 +5,7 @@ module BennetsWorld
       @icon = Gosu::Image.new(@game_window, './images/player1.png', true)
 
       @x = 50
-      @y = 50
+      @y = 450
     end
 
     def draw
@@ -42,6 +42,10 @@ module BennetsWorld
       else
         @y = @y + 10
       end
+    end
+
+    def hit_by?(balls)
+      balls.any? { |ball| Gosu::distance(@x, @y, ball.x, ball.y) < 50 }
     end
   end
 end
