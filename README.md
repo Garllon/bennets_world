@@ -1,6 +1,8 @@
 Couchmentoring: EVERYONE can learn to code
 ================
 
+[![Code Climate](https://codeclimate.com/github/Garllon/bennets_world/badges/gpa.svg)](https://codeclimate.com/github/Garllon/bennets_world)
+
 # Prerequisites
 
 I use Gosu for this testproject.
