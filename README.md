@@ -27,5 +27,5 @@ gem install gosu
 This is a project for my Couchmentoring.
 You can start it with:
 ```
-be ruby bennets_world.rb
+bundle exec ruby bennets_world.rb
 ```
