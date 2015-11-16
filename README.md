@@ -12,6 +12,11 @@ For Mac use:
 brew install sdl2
 ```
 
+For Linux use:
+```
+apt-get install libsdl2-dev
+```
+
 Then install gosu:
 ```
 gem install gosu
