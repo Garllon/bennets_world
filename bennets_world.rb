@@ -7,6 +7,7 @@ require 'bennets_world/player'
 require 'bennets_world/ball'
 
 module BennetsWorld
+  VERSION = '0.1.0'
 end
 
 window = BennetsWorld::Window.new
