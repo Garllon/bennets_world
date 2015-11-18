@@ -32,17 +32,24 @@ module BennetsWorld
     end
 
     def draw
-      [0, 300, 600].each do |y|
-        [0, 300, 600].each do |x|
-          background = Background.new(self, x, y)
-          background.draw(@background_image)
-        end
-      end
+      draw_background
       @player1.draw
       @balls.each { |ball| ball.draw }
     end
 
     private
+
+    def draw_background
+      @offset = @offset + 1
+      @offset = 0 if @offset == 300
+
+      [0, 300, 600].each do |x|
+        [-300, 0, 300, 600].each do |y|
+          background = Background.new(self, x, y + @offset)
+          background.draw(@background_image)
+        end
+      end
+    end
 
     def stop_game!
       @running = false
