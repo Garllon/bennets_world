@@ -8,7 +8,7 @@ require 'bennets_world/ball'
 require 'bennets_world/background'
 
 module BennetsWorld
-  VERSION = '0.1.0'
+  VERSION = '0.2.0-1'
 end
 
 window = BennetsWorld::Window.new
