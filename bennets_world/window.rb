@@ -4,41 +4,48 @@ module BennetsWorld
       super(700, 700, false)
       self.caption = 'Bennets Game'
 
-      @player1 = Player.new(self) 
-      @balls = 3.times.map { Ball.new(self) }
-      @running = true
+      @player           = Player.new(self)
+      @balls            = 3.times.map { Ball.new(self) }
+      @background_image = Gosu::Image.new(self, './images/background.png', true)
+      @menu             = Menu.new(self)
+      @theme            = Gosu::Song.new(self, 'music/theme.ogg')
+      @running          = false
+      @offset           = 0
     end
-    
+
     def update
+      @theme.play
+
       if @running
         case which_button
-        when 'left' then @player1.move_left
-        when 'right' then @player1.move_right
-        when 'up' then @player1.move_up
-        when 'down' then @player1.move_down
+        when 'left' then @player.move_left
+        when 'right' then @player.move_right
+        when 'up' then @player.move_up
+        when 'down' then @player.move_down
+        when 'escape' then @running = false && @menu.menu_action = nil
         end
 
         @balls.each { |ball| ball.update }
 
-        if @player1.hit_by?(@balls)
-          stop_game!
-        end
+        stop_game!  if @player.hit_by?(@balls)
       else
-        if button_down? Gosu::Button::KbEscape
-          restart_game
+        menu_action = @menu.update
+        if menu_action == "start"
+          @running = true
+        elsif menu_action == 'end'
+          close
         end
       end
     end
 
     def draw
-      @player1.draw
-      @balls.each { |ball| ball.draw }
-    end
-
-    private
-
-    def stop_game!
-      @running = false
+      draw_background
+      if @running
+        @player.draw
+        @balls.each { |ball| ball.draw }
+      else
+        @menu.draw
+      end
     end
 
     def restart_game
@@ -46,11 +53,35 @@ module BennetsWorld
       @balls.each { |ball| ball.reset! }
     end
 
+    def button_down(id)
+      @menu.button_down(id)
+    end
+
+    private
+
+    def draw_background
+      @offset = @offset + 1
+      @offset = 0 if @offset == 300
+
+      [0, 300, 600].each do |x|
+        [-300, 0, 300, 600].each do |y|
+          background = Background.new(self, x, y + @offset)
+          background.draw(@background_image)
+        end
+      end
+    end
+
+    def stop_game!
+      @running = false
+      @menu.menu_action = nil
+    end
+
     def which_button
       return 'left' if button_down? Gosu::Button::KbLeft 
       return 'right' if button_down? Gosu::Button::KbRight
       return 'up' if button_down? Gosu::Button::KbUp
       return 'down' if button_down? Gosu::Button::KbDown
+      return 'escape' if button_down? Gosu::Button::KbEscape
     end
   end
 end
