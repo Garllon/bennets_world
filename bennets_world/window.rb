@@ -22,14 +22,19 @@ module BennetsWorld
         when 'right' then @player.move_right
         when 'up' then @player.move_up
         when 'down' then @player.move_down
-        when 'escape' then @running = false
+        when 'escape' then @running = false && @menu.menu_action = nil
         end
 
         @balls.each { |ball| ball.update }
 
         stop_game!  if @player.hit_by?(@balls)
       else
-        toggle_menu
+        menu_action = @menu.update
+        if menu_action == "start"
+          @running = true
+        elsif menu_action == 'end'
+          close
+        end
       end
     end
 
@@ -43,23 +48,16 @@ module BennetsWorld
       end
     end
 
-    private
-
-    def toggle_menu
-      if button_down? Gosu::Button::KbUp
-        @menu.selection -= 1
-        if @menu.selection < 1
-          @menu.selection = 2
-        end
-      elsif button_down? Gosu::Button::KbDown
-        @menu.selection += 1
-        if @menu.selection > 2
-          @menu.selection = 1
-        end
-      elsif button_down? Gosu::KbReturn
-        restart_game if @menu.selection == 1
-      end
+    def restart_game
+      @running = true
+      @balls.each { |ball| ball.reset! }
     end
+
+    def button_down(id)
+      @menu.button_down(id)
+    end
+
+    private
 
     def draw_background
       @offset = @offset + 1
@@ -75,11 +73,7 @@ module BennetsWorld
 
     def stop_game!
       @running = false
-    end
-
-    def restart_game
-      @running = true
-      @balls.each { |ball| ball.reset! }
+      @menu.menu_action = nil
     end
 
     def which_button
