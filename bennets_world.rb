@@ -5,6 +5,7 @@ require 'gosu'
 require 'bennets_world/window'
 require 'bennets_world/player'
 require 'bennets_world/ball'
+require 'bennets_world/background'
 
 module BennetsWorld
   VERSION = '0.1.0'

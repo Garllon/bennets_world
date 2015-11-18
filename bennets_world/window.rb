@@ -6,9 +6,10 @@ module BennetsWorld
 
       @player1 = Player.new(self) 
       @balls = 3.times.map { Ball.new(self) }
+      @background_image = Gosu::Image.new(self, './images/background.png', true)
       @running = true
     end
-    
+
     def update
       if @running
         case which_button
@@ -31,6 +32,12 @@ module BennetsWorld
     end
 
     def draw
+      [0, 300, 600].each do |y|
+        [0, 300, 600].each do |x|
+          background = Background.new(self, x, y)
+          background.draw(@background_image)
+        end
+      end
       @player1.draw
       @balls.each { |ball| ball.draw }
     end
