@@ -17,10 +17,11 @@ module BennetsWorld
 
       if @running
         case which_button
-        when 'left' then @player1.move_left
-        when 'right' then @player1.move_right
-        when 'up' then @player1.move_up
-        when 'down' then @player1.move_down
+        when 'left' then @player.move_left
+        when 'right' then @player.move_right
+        when 'up' then @player.move_up
+        when 'down' then @player.move_down
+        when 'escape' then @running = false
         end
 
         @balls.each { |ball| ball.update }
@@ -33,8 +34,12 @@ module BennetsWorld
 
     def draw
       draw_background
-      @player1.draw
-      @balls.each { |ball| ball.draw }
+      if @running
+        @player.draw
+        @balls.each { |ball| ball.draw }
+      else
+        @menu.draw
+      end
     end
 
     private
@@ -65,6 +70,7 @@ module BennetsWorld
       return 'right' if button_down? Gosu::Button::KbRight
       return 'up' if button_down? Gosu::Button::KbUp
       return 'down' if button_down? Gosu::Button::KbDown
+      return 'escape' if button_down? Gosu::Button::KbEscape
     end
   end
 end
