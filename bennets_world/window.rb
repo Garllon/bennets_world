@@ -22,13 +22,9 @@ module BennetsWorld
 
         @balls.each { |ball| ball.update }
 
-        if @player1.hit_by?(@balls)
-          stop_game!
-        end
+        stop_game!  if @player1.hit_by?(@balls)
       else
-        if button_down? Gosu::Button::KbEscape
-          restart_game
-        end
+        restart_game if button_down? Gosu::Button::KbEscape
       end
     end
 
