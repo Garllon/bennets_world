@@ -7,8 +7,8 @@ module BennetsWorld
       @player           = Player.new(self)
       @balls            = 3.times.map { Ball.new(self) }
       @background_image = Gosu::Image.new(self, './images/background.png', true)
-      @running          = true
       @theme            = Gosu::Song.new(self, 'music/theme.ogg')
+      @running          = false
       @offset           = 0
     end
 
