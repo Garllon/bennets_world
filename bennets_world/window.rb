@@ -4,10 +4,11 @@ module BennetsWorld
       super(700, 700, false)
       self.caption = 'Bennets Game'
 
-      @player1 = Player.new(self) 
-      @balls = 3.times.map { Ball.new(self) }
+      @player1          = Player.new(self)
+      @balls            = 3.times.map { Ball.new(self) }
       @background_image = Gosu::Image.new(self, './images/background.png', true)
-      @running = true
+      @running          = true
+      @offset           = 0
     end
 
     def update
