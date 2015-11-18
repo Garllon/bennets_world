@@ -1,6 +1,6 @@
 module BennetsWorld
   class Ball
-    attr_reader :x, :y
+    attr_reader :x, :y, :speed
 
     def initialize(game_window)
       @game_window = game_window
@@ -8,14 +8,16 @@ module BennetsWorld
 
       @x = rand(@game_window.width)
       @y = 0
+      @speed = rand(5..10)
     end
 
     def update
       if y > @game_window.height
         @y = 0
         @x = rand(@game_window.width - @icon.width)
+        @speed = rand(5..10)
       else
-        @y = y + 10
+        @y = y + speed
       end
     end
 
