@@ -4,7 +4,7 @@ module BennetsWorld
       super(700, 700, false)
       self.caption = 'Bennets Game'
 
-      @player1          = Player.new(self)
+      @player           = Player.new(self)
       @balls            = 3.times.map { Ball.new(self) }
       @background_image = Gosu::Image.new(self, './images/background.png', true)
       @running          = true
@@ -26,7 +26,7 @@ module BennetsWorld
 
         @balls.each { |ball| ball.update }
 
-        stop_game!  if @player1.hit_by?(@balls)
+        stop_game!  if @player.hit_by?(@balls)
       else
         restart_game if button_down? Gosu::Button::KbEscape
       end
