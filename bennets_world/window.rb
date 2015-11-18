@@ -7,6 +7,7 @@ module BennetsWorld
       @player           = Player.new(self)
       @balls            = 3.times.map { Ball.new(self) }
       @background_image = Gosu::Image.new(self, './images/background.png', true)
+      @menu             = Menu.new(self)
       @theme            = Gosu::Song.new(self, 'music/theme.ogg')
       @running          = false
       @offset           = 0
@@ -28,7 +29,7 @@ module BennetsWorld
 
         stop_game!  if @player.hit_by?(@balls)
       else
-        restart_game if button_down? Gosu::Button::KbEscape
+        toggle_menu
       end
     end
 
@@ -43,6 +44,22 @@ module BennetsWorld
     end
 
     private
+
+    def toggle_menu
+      if button_down? Gosu::Button::KbUp
+        @menu.selection -= 1
+        if @menu.selection < 1
+          @menu.selection = 2
+        end
+      elsif button_down? Gosu::Button::KbDown
+        @menu.selection += 1
+        if @menu.selection > 2
+          @menu.selection = 1
+        end
+      elsif button_down? Gosu::KbReturn
+        restart_game if @menu.selection == 1
+      end
+    end
 
     def draw_background
       @offset = @offset + 1
