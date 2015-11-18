@@ -9,7 +9,7 @@ require 'bennets_world/background'
 require 'bennets_world/menu'
 
 module BennetsWorld
-  VERSION = '0.2.0-3'
+  VERSION = '0.2.0'
 end
 
 window = BennetsWorld::Window.new
