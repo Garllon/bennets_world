@@ -6,6 +6,7 @@ require 'bennets_world/window'
 require 'bennets_world/player'
 require 'bennets_world/ball'
 require 'bennets_world/background'
+require 'bennets_world/menu'
 
 module BennetsWorld
   VERSION = '0.2.0-2'
