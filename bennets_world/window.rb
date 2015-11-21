@@ -1,7 +1,10 @@
 module BennetsWorld
   class Window < Gosu::Window
+      SCREEN_HEIGHT = 700
+      SCREEN_WIDTH = 700
+
     def initialize
-      super(700, 700, false)
+      super(SCREEN_HEIGHT, SCREEN_WIDTH, false)
       self.caption = 'Bennets Game'
 
       @player           = Player.new(self)
@@ -17,14 +20,7 @@ module BennetsWorld
       @theme.play
 
       if @running
-        case which_button
-        when 'left' then @player.move_left
-        when 'right' then @player.move_right
-        when 'up' then @player.move_up
-        when 'down' then @player.move_down
-        when 'escape' then @running = false && @menu.menu_action = nil
-        end
-
+        handle_buttons
         @balls.each { |ball| ball.update }
 
         stop_game!  if @player.hit_by?(@balls)
@@ -75,6 +71,16 @@ module BennetsWorld
       @running = false
       @balls.each { |ball| ball.reset! }
       @menu.menu_action = nil
+    end
+
+    def handle_buttons
+      case which_button
+      when 'left' then @player.move_left
+      when 'right' then @player.move_right
+      when 'up' then @player.move_up
+      when 'down' then @player.move_down
+      when 'escape' then @running = false && @menu.menu_action = nil
+      end
     end
 
     def which_button

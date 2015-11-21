@@ -1,51 +1,51 @@
 module BennetsWorld
   class Player
-    def initialize(game_window)
-      @game_window = game_window
-      @icon = Gosu::Image.new(@game_window, './images/player1.png', true)
+    attr_reader :window, :icon, :x, :y
+
+    def initialize(window)
+      @window = window
+      @icon = Gosu::Image.new(window, './images/player1.png', true)
 
       @x = 50
       @y = 450
     end
 
     def draw
-      @icon.draw(@x, @y, 1)
+      icon.draw(x, y, 1)
     end
 
     def move_left
-      if @x < 0
-        @x = 0
-      else
-        @x = @x - 10
-      end
+      return @x = 0 if x < 0
+      @x -= 10
     end
 
     def move_right
-      if @x > (@game_window.width - @icon.width)
-        @x = @game_window.width - @icon.width
-      else
-        @x = @x + 10
-      end
+      return @x = rightmost_position if x > rightmost_position
+      @x += 10
     end
 
     def move_up
-      if @y < 0
-        @y = 0
-      else
-        @y = @y - 10
-      end
+      return @y = 0 if @y < 0
+      @y -= 10
     end
 
     def move_down
-      if @y > (@game_window.height - @icon.height)
-        @y = @game_window.height - @icon.height
-      else
-        @y = @y + 10
-      end
+      return @y = lowest_position if y > lowest_position
+      @y += 10
     end
 
     def hit_by?(balls)
-      balls.any? { |ball| Gosu::distance(@x, @y, ball.x, ball.y) < 50 }
+      balls.any? { |ball| Gosu::distance(x, y, ball.x, ball.y) < 50 }
+    end
+
+    private
+
+    def rightmost_position
+      window.width - icon.width
+    end
+
+    def lowest_position
+      window.height - icon.height 
     end
   end
 end
