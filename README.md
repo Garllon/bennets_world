@@ -36,6 +36,7 @@ bundle exec ruby bennets_world.rb
 
 Version 0.1.3
 - is only the game, without special things
+
 Version 0.2.1
 - is with music, sliding background and a menu
 
