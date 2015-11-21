@@ -73,6 +73,7 @@ module BennetsWorld
 
     def stop_game!
       @running = false
+      @balls.each { |ball| ball.reset! }
       @menu.menu_action = nil
     end
 
