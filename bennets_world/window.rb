@@ -1,7 +1,7 @@
 module BennetsWorld
   class Window < Gosu::Window
-      SCREEN_HEIGHT = 700
-      SCREEN_WIDTH = 700
+    SCREEN_HEIGHT = 700
+    SCREEN_WIDTH = 700
 
     def initialize
       super(SCREEN_HEIGHT, SCREEN_WIDTH, false)
