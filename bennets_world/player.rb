@@ -20,8 +20,8 @@ module BennetsWorld
     end
 
     def move_right
-      return @x = rightmost_position if x > rightmost_position
       @x += 10
+      return @x = rightmost_position if x > rightmost_position
     end
 
     def move_up
@@ -30,8 +30,8 @@ module BennetsWorld
     end
 
     def move_down
-      return @y = lowest_position if y > lowest_position
       @y += 10
+      return @y = lowest_position if y > lowest_position
     end
 
     def hit_by?(balls)
