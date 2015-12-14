@@ -9,6 +9,9 @@ I use Gosu for this testproject.
 
 So you need the SDL 2 library. Gosu is built on top of the SDL 2 library.
 
+We must fix some Problems with RubyGems under Windows:
+[![SSL Problem](https://gist.github.com/luislavena/f064211759ee0f806c88)]
+
 For Mac use:
 ```
 brew install sdl2
