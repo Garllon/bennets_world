@@ -5,7 +5,7 @@ Couchmentoring: EVERYONE can learn to code
 
 # Prerequisites
 
-I use Gosu for this testproject.
+I use Gosu for this test project.
 
 So you need the SDL 2 library. Gosu is built on top of the SDL 2 library.
 
